@@ -5,20 +5,11 @@
 #include "gfx_mono_text.h"
 #include "sysfont.h"
 
-/* Botao da placa */
-#define BUT_PIO     PIOA
-#define BUT_PIO_ID  ID_PIOA
-#define BUT_PIO_PIN 11
-#define BUT_PIO_PIN_MASK (1 << BUT_PIO_PIN)
-
-
 /************************************************************************/
 /* prototypes and types                                                 */
 /************************************************************************/
 
 /** prototypes */
-void but_callback(void);
-static void BUT_init(void);
 int genius_get_sequence(int level, int *sequence);
 void pin_toggle(Pio *pio, uint32_t mask);
 void TC_init(Tc * TC, int ID_TC, int TC_CHANNEL, int freq) ;
@@ -52,8 +43,6 @@ extern void vApplicationMallocFailedHook(void) {
 /* handlers / callbacks                                                 */
 /************************************************************************/
 
-void but_callback(void) {
-}
 
 /************************************************************************/
 /* TASKS                                                                */
@@ -61,12 +50,10 @@ void but_callback(void) {
 
 static void task_oled(void *pvParameters) {
 	gfx_mono_ssd1306_init();
-  gfx_mono_draw_string("Exemplo RTOS", 0, 0, &sysfont);
-  gfx_mono_draw_string("oii", 0, 20, &sysfont);
+	gfx_mono_draw_string("Level: 0", 0, 0, &sysfont);
 
 	for (;;)  {
-    
-
+		
 	}
 }
 
@@ -125,18 +112,6 @@ static void configure_console(void) {
 	setbuf(stdout, NULL);
 }
 
-static void BUT_init(void) {
-	/* configura prioridae */
-	NVIC_EnableIRQ(BUT_PIO_ID);
-	NVIC_SetPriority(BUT_PIO_ID, 4);
-
-	/* conf botão como entrada */
-	pio_configure(BUT_PIO, PIO_INPUT, BUT_PIO_PIN_MASK, PIO_PULLUP | PIO_DEBOUNCE);
-	pio_set_debounce_filter(BUT_PIO, BUT_PIO_PIN_MASK, 60);
-	pio_enable_interrupt(BUT_PIO, BUT_PIO_PIN_MASK);
-	pio_handler_set(BUT_PIO, BUT_PIO_ID, BUT_PIO_PIN_MASK, PIO_IT_FALL_EDGE , but_callback);
-}
-
 /************************************************************************/
 /* main                                                                 */
 /************************************************************************/
@@ -152,13 +127,13 @@ int main(void) {
 
 	/* Create task to control oled */
 	if (xTaskCreate(task_oled, "oled", TASK_OLED_STACK_SIZE, NULL, TASK_OLED_STACK_PRIORITY, NULL) != pdPASS) {
-	  printf("Failed to create oled task\r\n");
+		printf("Failed to create oled task\r\n");
 	}
 
 	/* Start the scheduler. */
 	vTaskStartScheduler();
 
-  /* RTOS não deve chegar aqui !! */
+	/* RTOS não deve chegar aqui !! */
 	while(1){}
 
 	/* Will only get here if there was insufficient memory to create the idle task. */
