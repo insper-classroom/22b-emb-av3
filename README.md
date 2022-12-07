@@ -1,6 +1,6 @@
 # 22b - AV3 - Genius
 
-Nesta avaliação vocês irão recriar o jogo Genius (Simon).
+Nesta avaliação vocês irão recriar o jogo Genius (Simon), só que com 3 botões no lugar de 4.
 
 ![](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.mileskimball.com%2Fimages%2Fp350854b.jpg&f=1&nofb=1&ipt=e6f6666673727671295f10315993e6429a66d375e9e2838db6ca4fc0ec662719&ipo=images)
 
@@ -27,20 +27,16 @@ Para implementarmos o protótipo do jogo iremos usar a placa OLED (LEDs e botõe
 
 ![](oled.png)
 
-- BTN 1: LED 1
-- BTN 2: LED 2
-- BTN 3: LED 3
+Para cada LED / botão apertado o jogo deve tocar uma frequência específica no buzzer, o som deve ser reproduzido enquanto o LED estiver aceso. 
 
-O jogo deve dar fim de Jogo se o jogador:
+O OLED irá exibir o nível atual do jogo e também uma mensagem de erro se o jogar errar e acabar o jogo. O fim de jogo deve acontecer quando o jogador:
 
 1. Apertar um botão enquanto a sequência ainda está sendo exibida
 1. Errar a ordem
+1. Se o jogador não apertar um botão em 500ms deve dar erro
 1. Apertar um botão a mais
-1. Se o jogador não apertar um botão 500ms deve dar erro
 
-Se o jogador fizer a sequência correta, o jogo deve partir para a próxima fase (incremental).
-
-[![](https://img.youtube.com/vi/owp5Dj5Lu-U/maxresdefault.jpg)](https://youtu.be/owp5Dj5Lu-U)
+Se o jogador fizer a sequência correta, o jogo deve partir para a próxima fase (incremental: 1, 2, 3 ...).
 
 ### Firmware
 
@@ -65,6 +61,7 @@ Onde:
 - Buzzer
   - Uma frequência por botão: `[2000 2500 3000]`
   - Vibrar enquanto o LED estiver aceso
+  - Usar algum timer para vibrar (TC ou RTT)
 
 - `task_game`
   - Responsável por implementar toda a lógica do jogo
@@ -83,11 +80,12 @@ Onde:
 
 ### Dicas
 
-1. Crie a `task_game` e usando a função `genius_get_sequence` crie uma sequência e exiba nos LEDs
+1. Crie a `task_game` e usando a função `genius_get_sequence` crie uma sequência (com a função `genius_get_sequence`) e exiba nos LEDs a sequência
   - Lembre de configurar os botões (`xQueueBtn`) e LEDs
-1. Usando o TC faca o buzzer vibrar na frequência associada ao LED aceso 
+  - Eu testei aqui e o led aceso por `100ms` funciona bem.
+1. Usando o TC faća o buzzer vibrar na frequência associada ao LED aceso 
   - O buzzer tem que vibrar com no `TC1_Handler`
-  - User o `pin_toggle` para isso!
+  - Use o `pin_toggle` para isso!
 1. Exiba no OLED o nível atual
 1. Comece ler a fila `xQueueBtn` e implemente a lógica do jogo
 1. Não esqueça do `timeout` do botão
