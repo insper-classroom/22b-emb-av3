@@ -59,7 +59,7 @@ Onde:
   - Exibe o nível **atual** e **FIM DE JOGO** quando acabar
 
 - Buzzer
-  - Uma frequência por botão: `[2000 2500 3000]`
+  - Uma frequência por botão: `[1000 1500 2000]`
   - Vibrar enquanto o LED estiver aceso
   - Usar algum timer para vibrar (TC ou RTT)
 
