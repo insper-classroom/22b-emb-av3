@@ -76,7 +76,7 @@ Onde:
   - **Já foi dada pronta, mas é necessário analisar para entender**
   - Função que deve ser utilizada para definir a sequência dos LEDs de acordo com o nível atingido pelo jogador
   - `return int`: Tamanho da sequência 
-  - `int level`: nível de `0` até `512`
+  - `int level`: nível de `0` até `511`
   - `int *sequence`: Deve ser um endereço de memória de um vetor, onde a sequência será salva.
 
 ### Dicas
@@ -95,14 +95,14 @@ Passos:
 1. Crie a `task_game` e usando a função `genius_get_sequence` crie uma sequência (com a função `genius_get_sequence`) e exiba nos LEDs a sequência
     - Lembre de configurar os botões (`xQueueBtn`) e LEDs
     - Eu testei aqui e o led aceso por `100ms` funciona bem.
-1. Usando o TC faća o buzzer vibrar na frequência associada ao LED aceso 
-    - Você vai precisar usar o `TC_init` e `tc_start` para comecar tocar o som e `tc_stop` para parar!
-    - O buzzer tem que vibrar com no `TC1_Handler`
+1. Usando o TC faça o buzzer vibrar na frequência associada ao LED aceso 
+    - Você vai precisar usar o `TC_init` e `tc_start` para começar a tocar o som e `tc_stop` para parar!
+    - O buzzer tem que vibrar no `TC1_Handler`
     - Use o `pin_toggle` para isso dentro do handler!
 1. Exiba no OLED o nível atual
-1. Comece ler a fila `xQueueBtn` e implemente a lógica do jogo
+1. Comece a ler a fila `xQueueBtn` e implemente a lógica do jogo
 1. Não esqueça do `timeout` do botão
-1. Exiba no OLED se o jogar errou ou se vai comecar um nível novo
-    - De um pouco de tempo para o jogar pensar entre um nível e outro 
+1. Exiba no OLED se o jogador errou ou se vai começar um nível novo
+    - Dê um pouco de tempo para o jogador pensar entre um nível e outro 
 
 Agora tudo deve estar funcionando, valide todos os requisitos.
