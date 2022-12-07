@@ -102,6 +102,7 @@ Passos:
 1. Exiba no OLED o nível atual
 1. Comece a ler a fila `xQueueBtn` e implemente a lógica do jogo
 1. Não esqueça do `timeout` do botão
+     - 
 1. Exiba no OLED se o jogador errou ou se vai começar um nível novo
     - Dê um pouco de tempo para o jogador pensar entre um nível e outro 
 
