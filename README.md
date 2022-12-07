@@ -30,16 +30,14 @@ Para implementarmos o protótipo do jogo, iremos usar a placa OLED (LEDs e botõ
 
 ![](oled.png)
 
-Para cada LED / botão apertado o jogo deve tocar uma frequência específica no buzzer, o som deve ser reproduzido enquanto o LED estiver aceso. 
-
-O OLED irá exibir o nível atual do jogo e também uma mensagem de erro se o jogador errar e acabar o jogo. O fim de jogo deve acontecer quando o jogador:
+Para cada LED / botão apertado o jogo deve tocar uma frequência específica no buzzer, o som deve ser reproduzido enquanto o LED estiver aceso. O OLED irá exibir o nível atual do jogo e também uma mensagem de erro se o jogador errar e acabar o jogo. **O fim de jogo** deve acontecer quando o jogador:
 
 1. Apertar um botão enquanto a sequência ainda está sendo exibida
 1. Errar a ordem
-1. Se o jogador não apertar um botão em 500ms deve dar erro
+1. Se o jogador não apertar um botão em 800ms deve dar erro
 1. Apertar um botão a mais
 
-Se o jogador fizer a sequência correta, o jogo deve partir para a próxima fase (incremental: 1, 2, 3 ...).
+Se o jogador fizer a sequência correta, o jogo deve partir para a próxima fase (incremental: 0, 1, 2, 3 ...).
 
 ### Firmware
 
@@ -47,7 +45,7 @@ Vocês devem desenvolver o firmware como indicado a seguir:
 
 ![](firmware.png)
 
-- **O código base fornecido é o `RTOS-OLED-Xplained-Pro` já com o RTT e TC adicionado no wizard.**
+**O código base fornecido é o `RTOS-OLED-Xplained-Pro` já com o RTT e TC adicionado no wizard.**
 
 Onde:
 
@@ -101,10 +99,13 @@ Passos:
     - Eu testei aqui e o led aceso por `100ms` funciona bem.
 1. Usando o TC faça o buzzer vibrar na frequência associada ao LED aceso 
     - Você vai precisar usar o `TC_init` e `tc_start` para começar a tocar o som e `tc_stop` para parar!
-    - O buzzer tem que vibrar no `TC1_Handler`
-    - Use o `pin_toggle` para isso dentro do handler!
+    - O buzzer tem que vibrar no `TC Handler`
+    - Use o `pin_toggle` dentro do handler, isso fará o buzzer tocar!
 1. Exiba no OLED o nível atual
 1. Comece a ler a fila `xQueueBtn` e implemente a lógica do jogo
+    - Falhar quando um botão foi apertado e a sequência ainda estava sendo exibida
+    - Verificar sequência correta
+    - Timeout do botão
 1. Não esqueça do `timeout` do botão
      - Eu usei `800ms
 1. Exiba no OLED se o jogador errou ou se vai começar um nível novo
