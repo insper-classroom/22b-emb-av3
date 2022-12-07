@@ -8,8 +8,6 @@
 /************************************************************************/
 /* prototypes and types                                                 */
 /************************************************************************/
-
-/** prototypes */
 int genius_get_sequence(int level, int *sequence);
 void pin_toggle(Pio *pio, uint32_t mask);
 void TC_init(Tc * TC, int ID_TC, int TC_CHANNEL, int freq) ;
@@ -47,7 +45,6 @@ extern void vApplicationMallocFailedHook(void) {
 /************************************************************************/
 /* TASKS                                                                */
 /************************************************************************/
-
 static void task_game(void *pvParameters) {
 	gfx_mono_ssd1306_init();
 	gfx_mono_draw_string("Level: 0", 0, 0, &sysfont);
@@ -60,7 +57,6 @@ static void task_game(void *pvParameters) {
 /************************************************************************/
 /* funcoes                                                              */
 /************************************************************************/
-
 int genius_get_sequence(int level, int *sequence){
 	int n = level + 3;
 
@@ -115,8 +111,6 @@ static void configure_console(void) {
 /************************************************************************/
 /* main                                                                 */
 /************************************************************************/
-
-
 int main(void) {
 	/* Initialize the SAM system */
 	sysclk_init();
