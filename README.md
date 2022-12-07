@@ -21,6 +21,9 @@ freeRTOS:
 
 O jogo consiste em decorar e reproduzir uma sequência que é apresentada de forma visual e a cada nível a sequência fica maior. O jogo continua até o jogador errar a ordem.
 
+[![](https://img.youtube.com/vi/NuTTUBVw2sE/maxresdefault.jpg)](https://www.youtube.com/embed/NuTTUBVw2sE)
+
+
 ### Funcionalidades
 
 Para implementarmos o protótipo do jogo, iremos usar a placa OLED (LEDs e botões):
@@ -64,6 +67,7 @@ Onde:
   - Usar algum timer para vibrar (TC ou RTT)
 
 - `task_game`
+  - **Já foi criada!**
   - Responsável por implementar toda a lógica do jogo
   - Lê os botões do usuário via `xQueueBtn`
   - Aciona os LEDs 
@@ -102,7 +106,7 @@ Passos:
 1. Exiba no OLED o nível atual
 1. Comece a ler a fila `xQueueBtn` e implemente a lógica do jogo
 1. Não esqueça do `timeout` do botão
-     - 
+     - Eu usei `800ms
 1. Exiba no OLED se o jogador errou ou se vai começar um nível novo
     - Dê um pouco de tempo para o jogador pensar entre um nível e outro 
 
