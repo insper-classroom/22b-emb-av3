@@ -48,7 +48,7 @@ extern void vApplicationMallocFailedHook(void) {
 /* TASKS                                                                */
 /************************************************************************/
 
-static void task_oled(void *pvParameters) {
+static void task_game(void *pvParameters) {
 	gfx_mono_ssd1306_init();
 	gfx_mono_draw_string("Level: 0", 0, 0, &sysfont);
 
@@ -86,7 +86,7 @@ void TC_init(Tc * TC, int ID_TC, int TC_CHANNEL, int freq) {
 	/* Configura o PMC */
 	pmc_enable_periph_clk(ID_TC);
 
-	/** Configura o TC para operar em  freq hz e interrupÁc„o no RC compare */
+	/** Configura o TC para operar em  freq hz e interrup√ßc√£o no RC compare */
 	tc_find_mck_divisor(freq, ul_sysclk, &ul_div, &ul_tcclks, ul_sysclk);
 	tc_init(TC, TC_CHANNEL, ul_tcclks | TC_CMR_CPCTRG);
 	tc_write_rc(TC, TC_CHANNEL, (ul_sysclk / ul_div) / freq);
@@ -126,14 +126,14 @@ int main(void) {
 	configure_console();
 
 	/* Create task to control oled */
-	if (xTaskCreate(task_oled, "oled", TASK_OLED_STACK_SIZE, NULL, TASK_OLED_STACK_PRIORITY, NULL) != pdPASS) {
-		printf("Failed to create oled task\r\n");
+	if (xTaskCreate(task_game, "game", TASK_OLED_STACK_SIZE, NULL, TASK_OLED_STACK_PRIORITY, NULL) != pdPASS) {
+		printf("Failed to create game task\r\n");
 	}
 
 	/* Start the scheduler. */
 	vTaskStartScheduler();
 
-	/* RTOS n„o deve chegar aqui !! */
+	/* RTOS n√£o deve chegar aqui !! */
 	while(1){}
 
 	/* Will only get here if there was insufficient memory to create the idle task. */
