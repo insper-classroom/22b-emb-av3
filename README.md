@@ -4,7 +4,7 @@ Nesta avaliação vocês irão recriar o jogo Genius (Simon), só que com 3 bot�
 
 ![](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.mileskimball.com%2Fimages%2Fp350854b.jpg&f=1&nofb=1&ipt=e6f6666673727671295f10315993e6429a66d375e9e2838db6ca4fc0ec662719&ipo=images)
 
-## Descricão
+## Descrição
 
 Periféricos:
 
@@ -19,17 +19,17 @@ freeRTOS:
 
 ### Genius
 
-O jogo consiste em decorar e reproduzir uma sequência que é apresentada de forma visual e a cada nível a sequência fica maior. Se o jogador continua até o jogador errar a ordem.
+O jogo consiste em decorar e reproduzir uma sequência que é apresentada de forma visual e a cada nível a sequência fica maior. O jogo continua até o jogador errar a ordem.
 
 ### Funcionalidades
 
-Para implementarmos o protótipo do jogo iremos usar a placa OLED (LEDs e botões):
+Para implementarmos o protótipo do jogo, iremos usar a placa OLED (LEDs e botões):
 
 ![](oled.png)
 
 Para cada LED / botão apertado o jogo deve tocar uma frequência específica no buzzer, o som deve ser reproduzido enquanto o LED estiver aceso. 
 
-O OLED irá exibir o nível atual do jogo e também uma mensagem de erro se o jogar errar e acabar o jogo. O fim de jogo deve acontecer quando o jogador:
+O OLED irá exibir o nível atual do jogo e também uma mensagem de erro se o jogador errar e acabar o jogo. O fim de jogo deve acontecer quando o jogador:
 
 1. Apertar um botão enquanto a sequência ainda está sendo exibida
 1. Errar a ordem
