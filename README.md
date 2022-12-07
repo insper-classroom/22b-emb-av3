@@ -67,6 +67,7 @@ Onde:
   - Responsável por implementar toda a lógica do jogo
   - Lê os botões do usuário via `xQueueBtn`
   - Aciona os LEDs 
+  - Controla o TC para fazer o buzzer vibrar
   
 - `TC1_Handler`
   - Vibrar buzzer na frequência definida para cada LED 
